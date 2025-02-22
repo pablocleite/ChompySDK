@@ -5,16 +5,13 @@ public class NativeAnalyticsModule: NSObject {
     private let processingQueue: DispatchQueue = DispatchQueue(label: "NativeAnalyticsModule.processingQueue", qos: .utility)
     var timer: DispatchSourceTimer?
     
-    private var isProcessingEvents = false
     private var eventQueue: [NativeAnalyticsEvent] = []
     
     
     @objc
     public static let shared = NativeAnalyticsModule();
     
-    private override init() {
-        
-    }
+    private override init() {}
     
     @objc
     public private(set) var isInitialized: Bool = false
@@ -35,17 +32,17 @@ public class NativeAnalyticsModule: NSObject {
         timer = DispatchSource.makeTimerSource(queue: processingQueue)
         timer?.schedule(deadline: .now() + .seconds(30), repeating: .seconds(30))
         timer?.setEventHandler { [weak self] in
-            guard self?.isProcessingEvents == false else { return }
-            self?.isProcessingEvents = true
-            
-            for var analyticsEvent in self?.eventQueue ?? [] {
-                guard analyticsEvent.isSent == false else { continue }
-
-                //Here the logic to send event to providers should be called
-                analyticsEvent.isSent = true
+            for i in 0..<(self?.eventQueue.count ?? 0) {
+                guard var event = self?.eventQueue[i] else { continue }
+                guard event.isSent == false else { continue }
                 
-                print("Sent event \(analyticsEvent.name) to providers")
-                self?.deleteEvent(analyticsEvent)
+                //Here the logic to send event to providers should be called
+                event.isSent = true
+                
+                print("Sent event \(event.name) to providers")
+                self?.deleteEvent(event)
+                
+                self?.eventQueue[i] = event //Update mutated copy
             }
             
             self?.eventQueue.removeAll(where: { event in

@@ -4,7 +4,7 @@ namespace ChompySDK.Analytics.NativeBridge
 {
     public interface NativeAnalyticsBridge
     {
-        bool IsInitialized { get;  }
+        bool IsInitialized { get; }
         
         void Init();
         

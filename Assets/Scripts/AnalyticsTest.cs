@@ -1,5 +1,6 @@
 using UnityEngine;
 using ChompySDK.Analytics;
+using ChompySDK.Analytics.Events;
 
 public class AnalyticsTest : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class AnalyticsTest : MonoBehaviour
     {
         var analytics = new Analytics();
         analytics.Init();
-        
+
+        var analyticsEvent = new AnalyticsEvent("TestEvent");
+        analytics.LogEvent(analyticsEvent);
     }
 
     // Update is called once per frame

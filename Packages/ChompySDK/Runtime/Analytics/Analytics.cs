@@ -16,7 +16,10 @@ namespace ChompySDK.Analytics
 	    
     	public void LogEvent(AnalyticsEvent analyticsEvent)
     	{
-		    if (!nativeBridge.IsInitialized) { throw new AnalyticsException("Analytics is not initialized."); }
+		    //TODO: Implement the getter from native side
+		    // if (!nativeBridge.IsInitialized) { throw new AnalyticsException("Analytics is not initialized."); }
+		    
+		    nativeBridge.LogEvent(analyticsEvent);
 		    
         	Debug.Log($"[Analytics] Event Tracked: {analyticsEvent.Name}");
     	}

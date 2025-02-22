@@ -4,12 +4,20 @@ using ChompySDK.Analytics.Events;
 
 public class AnalyticsTest : MonoBehaviour
 {
+    private Analytics analytics = new Analytics();
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        var analytics = new Analytics();
+        
         analytics.Init();
 
+        var analyticsEvent = new AnalyticsEvent("TestEvent");
+        analytics.LogEvent(analyticsEvent);
+    }
+
+    public void OnLogEventBtnClicked()
+    {
         var analyticsEvent = new AnalyticsEvent("TestEvent");
         analytics.LogEvent(analyticsEvent);
     }

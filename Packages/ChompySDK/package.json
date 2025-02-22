@@ -1,0 +1,12 @@
+{
+  "name": "com.pabloleite.chompysdk",
+  "displayName": "Chompy SDK",
+  "version": "0.0.1",
+  "unity": "2021.3",
+  "description": "A modular SDK for Analytics, Ads, IAP, remote config and further things.",
+  "dependencies": {},
+  "author": {
+    "name": "Pablo Leite",
+    "url": "https://linkedin.com/in/pabloleite"
+  }
+}
